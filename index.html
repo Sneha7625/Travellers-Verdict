@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traveller's Verdict</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7faff;
+            color: #333;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: #f8f9fc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 50px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            color: #0175ff;
+            margin: 0;
+        }
+
+        nav a {
+            margin: 0 15px;
+            font-size: 1rem;
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        nav .signup {
+            background-color: #0175ff;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+        }
+
+        nav a:hover {
+            color: #a6ceff;
+            box-shadow: #0073ff;
+        }
+
+        /* Main Section Styling */
+        main {
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            padding: 0 10px;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            border-radius: 8px 8px 0 0;
+            object-fit: cover;
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            color: #333;
+            margin: 15px 0;
+        }
+
+        .card p {
+            font-size: 1rem;
+            color: #666;
+            padding: 0 20px 20px;
+        }
+
+        /* Read More Button Styling */
+        .read-more-btn {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #0175ff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .read-more-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            margin: 40px auto;
+            padding: 40px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 60%;
+        }
+
+        .newsletter input {
+            padding: 10px;
+            width: 70%;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-right: 10px;
+            font-size: 1rem;
+        }
+
+        .newsletter button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #0175ff;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .newsletter button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Review Section */
+        .review-container {
+            margin: 40px auto;
+            padding: 40px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 60%;
+        }
+
+        .review-container h2 {
+            margin-bottom: 20px;
+        }
+
+        .review-container input[type="text"], 
+        .review-container input[type="file"], 
+        .review-container textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .review-container input[type="file"] {
+            padding: 5px;
+        }
+
+        .review-container textarea {
+            height: 150px;
+            resize: none;
+        }
+
+        .review-container button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #0175ff;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .review-container button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Footer Styling */
+        footer {
+            background-color: #f8f9fc;
+            padding: 20px 0;
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        footer a {
+            color: #0175ff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-links {
+            margin: 10px 0;
+        }
+
+        .footer-links a {
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Traveller's Verdict</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="blog.html">Blog</a>
+            <a href="contact.html">Contact</a>
+            <a href="login.html">Login</a>
+            <a class="signup" href="signup.html">Sign Up</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <h2>Discover Amazing Destinations</h2>
+        <div class="card-container">
+            <div class="card">
+                <img src="https://www.treebo.com/blog/wp-content/uploads/2018/08/Rishyap.jpg" alt="Hidden Gems in Bengal">
+                <h3>Hidden Places in Bengal</h3>
+                <p>Discovered several hidden beauties and temples off the beaten path of Darjeeling with a serene path via the Toy Train...</p>
+                <a href="blog.html" class="read-more-btn">Read More</a>
+            </div>
+            <div class="card">
+                <img src="https://catmotors.net/wp-content/uploads/2022/05/Chiang-Mai-Travel-Guide.jpg" alt="Paris on a Budget">
+                <h3>Paris on a Budget</h3>
+                <p>We had an amazing family vacation in Paris! The Eiffel Tower at night was stunning, and Disneyland Paris was a big hit with the kids...</p>
+                <a href="blog.html" class="read-more-btn">Read More</a>
+            </div>
+            <div class="card">
+                <img src="https://th.bing.com/th/id/OIP.Zq4B4Jpos45pT76z8i3h4AHaE8?w=284&h=189&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="Tokyo Food Guide">
+                <h3>Kyoto and it's culture </h3>
+                <p>Kyoto is a dream for culture lovers! I spent five days exploring temples, shrines, and gardens. The Fushimi Inari Shrine was breathtaking, especially at sunrise. ...</p>
+                <a href="blog.html" class="read-more-btn">Read More</a>
+            </div>
+            <div class="card">
+                <img src="https://pixelz.cc/wp-content/uploads/2018/05/pilatus-mountain-switzerland-uhd-4k-wallpaper.jpg" alt="Hidden Gems in Bengal">
+                <h3>Exploring the Beauty of the Swiss Alps</h3>
+                <p>Discover the breathtaking views and majestic landscapes of the Swiss Alps.....</p>
+                <a href="blog.html" class="read-more-btn">Read More</a>
+            </div>
+            <div class="card">
+                <img src="https://wallpapershome.com/images/pages/pic_h/5361.jpg" alt="Paris on a Budget">
+                <h3>Unveiling the Mysteries of Machu Pichu</h3>
+                <p>Machu Picchu is one of the most iconic ancient sites in the world....</p>
+                <a href="blog.html" class="read-more-btn">Read More</a>
+            </div>
+            <div class="card">
+                <img src="https://www.itchotels.com/content/dam/itchotels/in/umbrella/itc/hotels/itcgrandgoa-goa/images/overview/headmast-desktop/beach-experience.png" alt="Tokyo Food Guide">
+                <h3>Goa with my Homies</h3>
+                <p>Goa is the perfect getaway for a group trip! We rented scooters to explore different beaches, from the lively Baga Beach to the peaceful Palolem Beach...</p>
+                <a href="blog.html" class="read-more-btn">Read More</a>
+            </div>
+            <div class="card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmWtF08CvcpsiaufpVqH_G923zMeXdyq3BEA&s" alt="Hidden Gems in Bengal">
+                <h3>Business in New York</h3>
+                <p>I visited NYC for a conference and extended my trip to explore. The subway was efficient but confusing at times. Times Square was overwhelming but worth seeing once. The best part was the food...</p>
+                <a href="blog.html" class="read-more-btn">Read More</a>
+            </div>
+            <div class="card">
+                <img src="https://cdn.prod.website-files.com/63a9ec00d827c54b871ce72f/6514ee7e7292ae4c087fb662_Colombia-Digital-Nomads.webp" alt="Paris on a Budget">
+                <h3>The Nomadic Life</h3>
+                <p>Medellín is an underrated gem for digital nomads. The city is super affordable, and the WiFi in cafes and co-working spaces like Selina is fast. The metro system is clean and efficient, making it easy to explore. The weather is perfect...</p>
+                <a href="blog.html" class="read-more-btn">Read More</a>
+            </div>
+            <div class="card">
+                <img src="https://catmotors.net/wp-content/uploads/2022/05/Chiang-Mai-Travel-Guide.jpg" alt="Tokyo Food Guide">
+                <h3>The Thailand Business Tour</h3>
+                <p>Chiang Mai is a top destination for digital nomads. The cost of living is incredibly low—great apartments for under $500/month. Co-working spaces like Punspace and CAMP provide fast WiFi...</p>
+                <a href="blog.html" class="read-more-btn">Read More</a>
+            </div>
+        </div>
+
+        <!-- Review Input Section -->
+        <div class="review-container">
+            <h2>Submit Your Review</h2>
+            <form id="review-form" action="submit-review.php" method="POST" enctype="multipart/form-data">
+                <div>
+                    <label for="place-name">Place Name</label>
+                    <input type="text" id="place-name" name="place-name" placeholder="Enter the place name" required>
+                </div>
+
+                <div>
+                    <label for="photos">Upload Photos</label>
+                    <input type="file" id="photos" name="photos[]" multiple required>
+                </div>
+
+                <div>
+                    <label for="review-text">Write Your Review</label>
+                    <textarea id="review-text" name="review-text" placeholder="Share your experience..." required></textarea>
+                </div>
+
+                <button type="submit">Submit Review</button>
+            </form>
+        </div>
+
+        <!-- Newsletter Section -->
+        <div class="newsletter">
+            <h2>Stay Updated with the Latest Travel News</h2>
+            <p>Subscribe to our newsletter to receive the latest tips and deals</p>
+            <form id="newsletter-form" action="subscribe.php" method="POST">
+                <input type="email" id="newsletter-email" name="email" placeholder="Enter your email" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 Travellers Verdict. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="terms-of-service.html">Terms of Service</a>
+        </div>
+    </footer>
+</body>
+</html>
