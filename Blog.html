@@ -29,6 +29,26 @@
             margin: 0;
         }
 
+        nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #0175ff;
+            font-weight: bold;
+        }
+
+        .search-container {
+            text-align: center;
+            margin: 20px;
+        }
+
+        #search-bar {
+            width: 50%;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
         .card-container {
             display: flex;
             flex-wrap: wrap;
@@ -83,43 +103,64 @@
 
     <main>
         <h2 style="text-align: center; margin-top: 20px;">User Travel Reviews</h2>
+        <div class="search-container">
+            <input type="text" id="search-bar" placeholder="Search reviews...">
+        </div>
         <div class="card-container"></div>
     </main>
 
     <script>
+        let reviewsData = [];
+
         document.addEventListener("DOMContentLoaded", function () {
             fetch("http://127.0.0.1:5000/get_reviews")
                 .then(response => response.json())
                 .then(reviews => {
-                    const container = document.querySelector(".card-container");
-                    container.innerHTML = ""; // Clear previous content
-
-                    if (reviews.length === 0) {
-                        container.innerHTML = "<p style='text-align:center;'>No reviews available yet.</p>";
-                        return;
-                    }
-
-                    reviews.forEach(review => {
-                        const card = document.createElement("div");
-                        card.classList.add("card");
-
-                        let imagesHtml = "";
-                        if (review.images.length > 0) {
-                            imagesHtml = `<img src="http://127.0.0.1:5000${review.images[0]}" alt="Review Image">`;
-                        }
-
-                        card.innerHTML = `
-                            ${imagesHtml}
-                            <h3>${review.location} - ${review.purpose}</h3>
-                            <p><strong>${review.Name}</strong></p>
-                            <p>${review.review}</p>
-                            <p><strong>Budget:</strong> ${review.budget}</p>
-                            <p><strong>Transport:</strong> ${review.transport}</p>
-                        `;
-                        container.appendChild(card);
-                    });
+                    reviewsData = reviews;
+                    displayReviews(reviewsData);
                 })
                 .catch(error => console.error("Error loading reviews:", error));
+        });
+
+        function displayReviews(reviews) {
+            const container = document.querySelector(".card-container");
+            container.innerHTML = ""; // Clear previous content
+
+            if (reviews.length === 0) {
+                container.innerHTML = "<p style='text-align:center;'>No reviews available yet.</p>";
+                return;
+            }
+
+            reviews.forEach(review => {
+                const card = document.createElement("div");
+                card.classList.add("card");
+
+                let imagesHtml = "";
+                if (review.images.length > 0) {
+                    imagesHtml = `<img src="http://127.0.0.1:5000${review.images[0]}" alt="Review Image">`;
+                }
+
+                card.innerHTML = `
+                    ${imagesHtml}
+                    <h3>${review.location} - ${review.purpose}</h3>
+                    <p><strong>${review.Name}</strong></p>
+                    <p>${review.review}</p>
+                    <p><strong>Budget:</strong> ${review.budget}</p>
+                    <p><strong>Transport:</strong> ${review.transport}</p>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        document.getElementById("search-bar").addEventListener("input", function () {
+            const searchText = this.value.toLowerCase();
+            const filteredReviews = reviewsData.filter(review => 
+                review.location.toLowerCase().includes(searchText) ||
+                review.purpose.toLowerCase().includes(searchText) ||
+                review.review.toLowerCase().includes(searchText) ||
+                review.transport.toLowerCase().includes(searchText)
+            );
+            displayReviews(filteredReviews);
         });
     </script>
 
