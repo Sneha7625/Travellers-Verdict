@@ -36,17 +36,37 @@
             font-weight: bold;
         }
 
-        .search-container {
+        .search-bar {
             text-align: center;
-            margin: 20px;
+            margin: 20px 0;
         }
 
-        #search-bar {
+        .search-bar input {
             width: 50%;
             padding: 10px;
             font-size: 1rem;
             border: 1px solid #ccc;
             border-radius: 5px;
+        }
+
+        .keyword-buttons {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .keyword-buttons button {
+            background-color: #0175ff;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .keyword-buttons button:hover {
+            background-color: #005bbd;
         }
 
         .card-container {
@@ -77,16 +97,6 @@
         .card:hover {
             transform: translateY(-5px);
         }
-
-        .card h3 {
-            font-size: 1.4rem;
-            color: #333;
-        }
-
-        .card p {
-            font-size: 1rem;
-            color: #666;
-        }
     </style>
 </head>
 <body>
@@ -101,30 +111,36 @@
         </nav>
     </header>
 
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search reviews...">
+    </div>
+
+    <div class="keyword-buttons">
+        <button onclick="filterByKeyword('Family')">Family</button>
+        <button onclick="filterByKeyword('Vacation')">Vacation</button>
+        <button onclick="filterByKeyword('Budget')">Budget</button>
+        <button onclick="filterByKeyword('Luxury')">Luxury</button>
+        <button onclick="filterByKeyword('Business')">Business</button>
+    </div>
+
     <main>
         <h2 style="text-align: center; margin-top: 20px;">User Travel Reviews</h2>
-        <div class="search-container">
-            <input type="text" id="search-bar" placeholder="Search reviews...">
-        </div>
         <div class="card-container"></div>
     </main>
 
     <script>
-        let reviewsData = [];
-
         document.addEventListener("DOMContentLoaded", function () {
             fetch("http://127.0.0.1:5000/get_reviews")
                 .then(response => response.json())
                 .then(reviews => {
-                    reviewsData = reviews;
-                    displayReviews(reviewsData);
+                    displayReviews(reviews);
                 })
                 .catch(error => console.error("Error loading reviews:", error));
         });
 
         function displayReviews(reviews) {
             const container = document.querySelector(".card-container");
-            container.innerHTML = ""; // Clear previous content
+            container.innerHTML = "";
 
             if (reviews.length === 0) {
                 container.innerHTML = "<p style='text-align:center;'>No reviews available yet.</p>";
@@ -135,10 +151,7 @@
                 const card = document.createElement("div");
                 card.classList.add("card");
 
-                let imagesHtml = "";
-                if (review.images.length > 0) {
-                    imagesHtml = `<img src="http://127.0.0.1:5000${review.images[0]}" alt="Review Image">`;
-                }
+                let imagesHtml = review.images.length > 0 ? `<img src="http://127.0.0.1:5000${review.images[0]}" alt="Review Image">` : "";
 
                 card.innerHTML = `
                     ${imagesHtml}
@@ -152,16 +165,25 @@
             });
         }
 
-        document.getElementById("search-bar").addEventListener("input", function () {
-            const searchText = this.value.toLowerCase();
-            const filteredReviews = reviewsData.filter(review => 
-                review.location.toLowerCase().includes(searchText) ||
-                review.purpose.toLowerCase().includes(searchText) ||
-                review.review.toLowerCase().includes(searchText) ||
-                review.transport.toLowerCase().includes(searchText)
-            );
-            displayReviews(filteredReviews);
+        document.getElementById("searchInput").addEventListener("input", function () {
+            const searchTerm = this.value.toLowerCase();
+            fetch("http://127.0.0.1:5000/get_reviews")
+                .then(response => response.json())
+                .then(reviews => {
+                    const filteredReviews = reviews.filter(review => 
+                        review.location.toLowerCase().includes(searchTerm) ||
+                        review.purpose.toLowerCase().includes(searchTerm) ||
+                        review.review.toLowerCase().includes(searchTerm)
+                    );
+                    displayReviews(filteredReviews);
+                });
         });
+
+        function filterByKeyword(keyword) {
+            document.getElementById("searchInput").value = keyword;
+            const event = new Event("input");
+            document.getElementById("searchInput").dispatchEvent(event);
+        }
     </script>
 
 </body>
