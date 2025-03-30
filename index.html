@@ -308,26 +308,60 @@
         <!-- Review Input Section -->
         <div class="review-container">
             <h2>Submit Your Review</h2>
-            <form id="review-form" action="submit-review.php" method="POST" enctype="multipart/form-data">
-                <div>
-                    <label for="place-name">Place Name</label>
-                    <input type="text" id="place-name" name="place-name" placeholder="Enter the place name" required>
-                </div>
-
+            <form id="reviewForm">
+                <input type="text" id="Name" placeholder="Name" required>
+                <input type="text" id="location" placeholder="Location" required>
+                <input type="text" id="purpose" placeholder="Purpose" required>
+                <input type="text" id="budget" placeholder="Budget" required>
+                <input type="text" id="transport" placeholder="Transport" required>
                 <div>
                     <label for="photos">Upload Photos</label>
                     <input type="file" id="photos" name="photos[]" multiple required>
                 </div>
-
-                <div>
-                    <label for="review-text">Write Your Review</label>
-                    <textarea id="review-text" name="review-text" placeholder="Share your experience..." required></textarea>
-                </div>
-
-                <button type="submit">Submit Review</button>
+                <textarea id="review" placeholder="Write your review" required></textarea>
+                <button type="button" onclick="submitReview()">Submit Review</button>
             </form>
         </div>
+        <script>
+           function submitReview() {
+    const formData = new FormData();
+    const files = document.getElementById("photos").files;
 
+    for (let i = 0; i < files.length; i++) {
+        formData.append("photos", files[i]);
+    }
+
+    fetch("http://127.0.0.1:5000/upload_photos", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.json())
+    .then(photoData => {
+        const reviewData = {
+            Name: document.getElementById("Name").value,
+            location: document.getElementById("location").value,
+            purpose: document.getElementById("purpose").value,
+            budget: document.getElementById("budget").value,
+            transport: document.getElementById("transport").value,
+            review: document.getElementById("review").value,
+            photo_urls: photoData.urls
+        };
+
+        return fetch("http://127.0.0.1:5000/add_review", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(reviewData)
+        });
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+        document.getElementById("reviewForm").reset();
+    })
+    .catch(error => console.error("Error:", error));
+}
+
+            </script>
         <!-- Newsletter Section -->
         <div class="newsletter">
             <h2>Stay Updated with the Latest Travel News</h2>

@@ -10,17 +10,16 @@
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #f7faff;
             color: #333;
-            background-color: #f8f9fc;
         }
 
-        /* Header Styling */
         header {
-            background-color: #fff;
+            background-color: #f8f9fc;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 50px;
+            padding: 10px 50px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
@@ -30,352 +29,98 @@
             margin: 0;
         }
 
-        nav a {
-            margin: 0 15px;
-            font-size: 1rem;
-            color: #333;
-            text-decoration: none;
-            font-weight: 500;
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
         }
 
-        nav a:hover {
-            color: #0175ff;
-        }
-
-        /* Search Bar */
-        .search-container {
-            position: relative;
-        }
-
-        .search-container input {
-            padding: 8px 20px;
-            font-size: 1rem;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            width: 300px;
-        }
-
-        .search-container input:focus {
-            outline: none;
-            border-color: #0175ff;
-        }
-
-        /* Main Content Styling */
-        .container {
-            padding: 50px;
-            display: grid;
-            grid-template-columns: repeat(1, 1fr); /* Single column */
-            grid-gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .blog-post {
+        .card {
             background-color: white;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            display: flex;
+            width: 300px;
             transition: transform 0.3s ease;
-            overflow: hidden;
-        }
-
-        .blog-post:hover {
-            transform: translateY(-5px); /* Lift the card slightly on hover */
-        }
-
-        .blog-post img {
-            width: 40%;
-            object-fit: cover;
-            height: auto;
-        }
-
-        .blog-post .content {
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            width: 60%;
-        }
-
-        .blog-post h2 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: #0175ff;
-        }
-
-        .blog-post p {
-            font-size: 1rem;
-            color: #666;
-            margin-bottom: 15px;
-            line-height: 1.6;
-        }
-
-        .blog-post a {
-            color: #0175ff;
-            text-decoration: none;
-            font-weight: 500;
-            margin-top: auto;
-        }
-
-        .blog-post a:hover {
-            text-decoration: underline;
-        }
-
-        /* Review Section Styling */
-        .reviews-section {
-            background-color: #fff;
-            padding: 50px;
+            padding: 15px;
             text-align: center;
         }
 
-        .reviews-section h2 {
-            font-size: 2rem;
-            color: #0175ff;
-            margin-bottom: 40px;
-        }
-
-        .review-slider {
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .review {
-            display: none;
-            text-align: center;
-        }
-
-        .review.active {
-            display: block;
-        }
-
-        .review .review-images {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .review .review-images img {
-            width: 120px;
-            height: 120px;
+        .card img {
+            width: 100%;
+            height: 200px;
+            border-radius: 8px;
             object-fit: cover;
-            border-radius: 10px;
         }
 
-        .review h3 {
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
             font-size: 1.4rem;
             color: #333;
-            margin-bottom: 10px;
         }
 
-        .review p {
+        .card p {
             font-size: 1rem;
             color: #666;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .review .place {
-            font-weight: bold;
-            color: #0175ff;
-        }
-
-        /* Footer Styling */
-        footer {
-            background-color: #f8f9fc;
-            padding: 20px 0;
-            text-align: center;
-            color: #666;
-            font-size: 0.9rem;
-            margin-top: 30px;
-        }
-
-        footer p {
-            margin: 5px 0;
-        }
-
-        footer a {
-            color: #0175ff;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .blog-post {
-                flex-direction: column; /* Stack the image and content vertically on smaller screens */
-            }
-
-            .blog-post img {
-                width: 100%; /* Make image full-width */
-                height: auto;
-            }
-
-            .blog-post .content {
-                width: 100%;
-            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
     <header>
         <h1>Traveller's Verdict</h1>
         <nav>
             <a href="index.html">Home</a>
+            <a href="blog.html">Blog</a>
             <a href="about.html">About</a>
-            <a href="Blog.html">Blog</a>
             <a href="contact.html">Contact</a>
         </nav>
-        <!-- Search Bar -->
-        <div class="search-container">
-            <input type="text" placeholder="Search places, articles...">
-        </div>
     </header>
 
-    <!-- Main Content: Blog Posts -->
-    <div class="container">
-        <!-- Blog Post 1 -->
-        <div class="blog-post">
-            <img src="https://pixelz.cc/wp-content/uploads/2018/05/pilatus-mountain-switzerland-uhd-4k-wallpaper.jpg" alt="Blog Post 1">
-            <div class="content">
-                <h2>Exploring the Beauty of the Swiss Alps</h2>
-                <p>Discover the breathtaking views and majestic landscapes of the Swiss Alps. Perfect for adventure seekers and nature lovers alike, this travel destination offers year-round excitement.</p>
-                <a href="#">Read More</a>
-            </div>
-        </div>
+    <main>
+        <h2 style="text-align: center; margin-top: 20px;">User Travel Reviews</h2>
+        <div class="card-container"></div>
+    </main>
 
-        <!-- Blog Post 2 -->
-        <div class="blog-post">
-            <img src="https://wallpapershome.com/images/pages/pic_h/5361.jpg" alt="Blog Post 2">
-            <div class="content">
-                <h2>Unveiling the Mysteries of Machu Picchu</h2>
-                <p>Machu Picchu is one of the most iconic ancient sites in the world. Dive into its fascinating history and experience the wonder of Peru's most famous landmark.</p>
-                <a href="#">Read More</a>
-            </div>
-        </div>
-
-        <!-- Blog Post 3 -->
-        <div class="blog-post">
-            <img src="https://wallpapershome.com/images/pages/pic_h/26309.jpg" alt="Blog Post 3">
-            <div class="content">
-                <h2>A Journey Through the Streets of Tokyo</h2>
-                <p>From the bustling streets of Shibuya to the serene temples of Asakusa, Tokyo offers a mix of ancient tradition and futuristic innovation. A must-visit for any travel enthusiast.</p>
-                <a href="#">Read More</a>
-            </div>
-        </div>
-
-        <!-- Blog Post 4 -->
-        <div class="blog-post">
-            <img src="https://wallpapershome.com/images/pages/pic_h/5742.jpg" alt="Blog Post 4">
-            <div class="content">
-                <h2>Relaxing in the Beaches of Bali</h2>
-                <p>Bali is a tropical paradise known for its stunning beaches, vibrant culture, and luxurious resorts. It's the perfect getaway for those seeking both relaxation and adventure.</p>
-                <a href="#">Read More</a>
-            </div>
-        </div>
-
-        <!-- Blog Post 5 -->
-        <div class="blog-post">
-            <img src="https://a-static.besthdwallpaper.com/african-lion-serengeti-wallpaper-2880x1800-87696_8.jpg" alt="Blog Post 5">
-            <div class="content">
-                <h2>A Safari Adventure in the Serengeti</h2>
-                <p>The Serengeti is home to one of the most spectacular wildlife migrations in the world. Explore the African savannah and get up close with the 'Big Five' on a thrilling safari adventure.</p>
-                <a href="#">Read More</a>
-            </div>
-        </div>
-
-        <!-- Blog Post 6 -->
-        <div class="blog-post">
-            <img src="https://cdn.prod.website-files.com/63a9ec00d827c54b871ce72f/6514ee7e7292ae4c087fb662_Colombia-Digital-Nomads.webp" alt="Blog Post 6">
-            <div class="content">
-                <h2>The Nomadic Life</h2>
-                <p>Medellín is an underrated gem for digital nomads. The city is super affordable, and the WiFi in cafes and co-working spaces like Selina is fast. The metro system is clean and efficient, making it easy to explore. The weather is perfect</p>
-                <a href="#">Read More</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Traveler Reviews Section -->
-    <div class="reviews-section">
-        <h2>Traveller Reviews</h2>
-
-        <div class="review-slider">
-            <div class="review active">
-                <div class="review-images">
-                    <img src="https://catmotors.net/wp-content/uploads/2022/05/Chiang-Mai-Travel-Guide.jpg" alt="Traveler Photo 1">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQPsmpOu1wMl6hJ1GnKoL52lOCTAdGuFKeNA&s" alt="Traveler Photo 2">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSc2ltD6e1cVQjUO0_Sa372KraaofcL4Zpupg&s" alt="Traveler Photo 3">
-                </div>
-                <h3>Emily Johnson</h3>
-                <p>"Chiang Mai is a top destination for digital nomads. The cost of living is incredibly low—great apartments for under $500/month. Co-working spaces like Punspace and CAMP provide fast WiFi"</p>
-                <p class="place">Place: Chiang Mai, Thailand</p>
-            </div>
-
-            <div class="review">
-                <div class="review-images">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ43rjcX1zg8mM0wug8mRfRrOt6yhBSi1oXlA&s" alt="Traveler Photo 1">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9beDfPt01cZn8qhu8deY8erhTW_ZF6uaNQQ&s" alt="Traveler Photo 2">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJj_ZPo2dkO9rcGA9BM1f1r5Jecpz2h-tHfg&s" alt="Traveler Photo 3">
-                </div>
-                <h3>Michael Chen</h3>
-                <p>""The Maldives is everything I imagined and more! The crystal-clear turquoise waters, white sandy beaches, and the serene atmosphere made it the perfect vacation spot. I stayed in an overwater villa, and waking up to the sound of the ocean...."</p>
-                <p class="place">Place: The Maldives</p>
-            </div>
-
-            <div class="review">
-                <div class="review-images">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOL7VWAVvr0dv10TG60sXCZds2kRQi2s2QDg&s" alt="Traveler Photo 1">
-                    <img src="https://trekthehimalayas.com/images/EverestBaseCampTrek/GalleryDesktop/Summer/8ebcab01-64a4-4a6b-9a4c-f2b4de2650fc_EBC-2.webp" alt="Traveler Photo 2">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9HjDgsdDCoiZQCkeGnXp1b6ofWkTNblgCng&s" alt="Traveler Photo 3">
-                </div>
-                <h3>Sarah Lee</h3>
-                <p>"The Everest Base Camp trek was a challenging but deeply rewarding experience. The 12-day journey through the Himalayas pushed my limits, but the breathtaking scenery made every step worth it. Trekking through remote villages, crossing suspension bridges..."</p>
-                <p class="place">Place: Everest Base Camp, Nepal</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 Traveller's Verdict. All rights reserved.</p>
-    </footer>
-
-    <!-- JavaScript for Review Slider -->
     <script>
-        let currentReview = 0;
-        const reviews = document.querySelectorAll('.review');
-        const reviewCount = reviews.length;
-        let reviewInterval;
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch("http://127.0.0.1:5000/get_reviews")
+                .then(response => response.json())
+                .then(reviews => {
+                    const container = document.querySelector(".card-container");
+                    container.innerHTML = ""; // Clear previous content
 
-        function showReview(index) {
-            reviews.forEach(review => review.classList.remove('active'));
-            reviews[index].classList.add('active');
-        }
+                    if (reviews.length === 0) {
+                        container.innerHTML = "<p style='text-align:center;'>No reviews available yet.</p>";
+                        return;
+                    }
 
-        function startReviewInterval() {
-            reviewInterval = setInterval(() => {
-                currentReview = (currentReview + 1) % reviewCount;
-                showReview(currentReview);
-            }, 4000); // Change review every 4 seconds
-        }
+                    reviews.forEach(review => {
+                        const card = document.createElement("div");
+                        card.classList.add("card");
 
-        function stopReviewInterval() {
-            clearInterval(reviewInterval);
-        }
+                        let imagesHtml = "";
+                        if (review.images.length > 0) {
+                            imagesHtml = `<img src="http://127.0.0.1:5000${review.images[0]}" alt="Review Image">`;
+                        }
 
-        // Start the review slider
-        startReviewInterval();
-
-        // Pause slider when hovering over the reviews
-        const reviewSlider = document.querySelector('.review-slider');
-        reviewSlider.addEventListener('mouseover', stopReviewInterval);
-        reviewSlider.addEventListener('mouseout', startReviewInterval);
+                        card.innerHTML = `
+                            ${imagesHtml}
+                            <h3>${review.location} - ${review.purpose}</h3>
+                            <p><strong>${review.Name}</strong></p>
+                            <p>${review.review}</p>
+                            <p><strong>Budget:</strong> ${review.budget}</p>
+                            <p><strong>Transport:</strong> ${review.transport}</p>
+                        `;
+                        container.appendChild(card);
+                    });
+                })
+                .catch(error => console.error("Error loading reviews:", error));
+        });
     </script>
 
 </body>
