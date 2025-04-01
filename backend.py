@@ -1,19 +1,89 @@
 from flask import Flask, request, jsonify, send_from_directory
+from flask_bcrypt import Bcrypt
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 from flask_cors import CORS
+from pymongo import MongoClient
 import os
 import uuid
 
 app = Flask(__name__)
 CORS(app)
 
-# Configure upload folder
+# JWT Configuration
+app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', 'fallback_secret_key')   # Change to a strong secret key
+bcrypt = Bcrypt(app)
+jwt = JWTManager(app)
+
+# MongoDB Configuration
+client = MongoClient("mongodb://localhost:27017/")
+db = client.travel_reviews
+users_collection = db.users
+reviews_collection = db.reviews
+
+# Configure Upload Folder
 UPLOAD_FOLDER = "uploads"
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
-
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
-# In-memory storage for reviews (Use MongoDB in production)
+### ---- USER AUTHENTICATION ---- ###
+
+# User Signup
+@app.route('/signup', methods=['POST'])
+def signup():
+    try:
+        data = request.json  # Ensure frontend is sending JSON
+        name = data.get("name")
+        email = data.get("email")
+        password = data.get("password")
+
+        if not name or not email or not password:
+            return jsonify({"error": "Missing required fields"}), 400
+
+        # Check if email already exists
+        if users_collection.find_one({"email": email}):
+            return jsonify({"error": "Email already registered"}), 409
+
+        # Hash password before storing
+        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+
+        new_user = {"name": name, "email": email, "password": hashed_password}
+        users_collection.insert_one(new_user)
+
+        return jsonify({"message": "Signup successful!"}), 201
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500  # Proper indentation here
+
+# User Login
+@app.route('/login', methods=['POST'])
+def login():
+    try:
+        data = request.json
+        email = data.get("email")
+        password = data.get("password")
+
+        if not email or not password:
+            return jsonify({"error": "Missing email or password"}), 400
+
+        user = users_collection.find_one({"email": email})
+
+        if user and bcrypt.check_password_hash(user["password"], password):
+            access_token = create_access_token(identity=user["email"])
+            return jsonify({"token": access_token, "message": "Login successful!"}), 200
+        else:
+            return jsonify({"error": "Invalid credentials"}), 401
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+# Protected Route Example
+@app.route('/protected', methods=['GET'])
+@jwt_required()
+def protected():
+    current_user = get_jwt_identity()
+    return jsonify({"message": f"Hello, {current_user}"}), 200
+
+### ---- PHOTO UPLOADS ---- ###
+
 reviews = []
 
 @app.route("/upload_photos", methods=["POST"])

@@ -11,174 +11,84 @@
             margin: 0;
             padding: 0;
             background-color: #f7faff;
-            color: #333;
-        }
-
-        /* Header Styling */
-        header {
-            background-color: #f8f9fc;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 50px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        header h1 {
-            font-size: 1.8rem;
-            color: #0175ff;
-            margin: 0;
-        }
-
-        nav a {
-            margin: 0 15px;
-            font-size: 1rem;
-            color: #333;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        nav .signup {
-            background-color: #0175ff;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 4px;
-        }
-
-        nav a:hover {
-            color: #0175ff;
-        }
-
-        /* Login Section Styling */
-        .login-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 80vh;
-            padding: 20px;
-            background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bW91bnRhaW4lMjBzdGFyJTIwbGFuZHNjYXBlJTIwbmlnaHQlMjBza3l8ZW58MHx8MHx8fDA%3D');
-            background-size:cover;
+            height: 100vh;
         }
-
-        .login-box {
+        .login-container {
             background-color: white;
-            width: 400px;
-            padding: 40px;
+            padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
             text-align: center;
         }
-
-        .login-box h2 {
-            font-size: 1.8rem;
+        .login-container h2 {
             margin-bottom: 20px;
-            color: #333;
+            color: #0175ff;
         }
-
-        .login-box input {
+        input {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
             font-size: 1rem;
         }
-
-        .login-box button {
+        button {
             width: 100%;
             padding: 10px;
-            border: none;
             background-color: #0175ff;
             color: white;
+            border: none;
+            border-radius: 5px;
             font-size: 1rem;
             cursor: pointer;
-            border-radius: 4px;
-            transition: background-color 0.3s ease;
         }
-
-        .login-box button:hover {
+        button:hover {
             background-color: #0056b3;
         }
-
-        .forgot-password {
-            display: block;
-            margin-top: 10px;
+        .error-message {
+            color: red;
             font-size: 0.9rem;
-            color: #0175ff;
-            text-decoration: none;
-        }
-
-        .forgot-password:hover {
-            text-decoration: underline;
-        }
-
-        /* Footer Styling */
-        footer {
-            background-color: #f8f9fc;
-            padding: 20px 0;
-            text-align: center;
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        footer p {
-            margin: 5px 0;
-        }
-
-        footer a {
-            color: #0175ff;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        .footer-links {
-            margin: 10px 0;
-        }
-
-        .footer-links a {
-            margin: 0 10px;
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <h1>Traveller's Verdict</h1>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="Blog.html">Blog</a>
-            <a href="contact.html">Contact</a>
-            <a href="login.html">Login</a>
-            <a class="signup" href="signup.html">Sign Up</a>
-        </nav>
-    </header>
-
-    <!-- Login Section -->
     <div class="login-container">
-        <div class="login-box">
-            <h2>Login</h2>
-            <form action="#" method="POST">
-                <input type="email" name="email" placeholder="Email" required>
-                <input type="password" name="password" placeholder="Password" required>
-                <button type="submit">Login</button>
-                <a class="forgot-password" href="#">Forgot Password?</a>
-            </form>
-        </div>
+        <h2>Login</h2>
+        <input type="email" id="email" placeholder="Email">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="login()">Login</button>
+        <p class="error-message" id="error-message"></p>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 Travellers Verdict. All rights reserved.</p>
-        <div class="footer-links">
-            <a href="#">About Us</a> |
-            <a href="#">Instagram</a> |
-            <a href="#">Facebook</a> |
-            <a href="#">YouTube</a>
-        </div>
-    </footer>
+    <script>
+        function login() {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const errorMessage = document.getElementById("error-message");
+            errorMessage.textContent = "";
+            
+            fetch("http://127.0.0.1:5000/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.token) {
+                    localStorage.setItem("token", data.token);
+                    window.location.href = "blog.html";
+                } else {
+                    errorMessage.textContent = data.error;
+                }
+            })
+            .catch(error => {
+                errorMessage.textContent = "Login failed. Try again.";
+            });
+        }
+    </script>
 </body>
 </html>
