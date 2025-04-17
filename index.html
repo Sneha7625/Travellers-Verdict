@@ -229,6 +229,106 @@
         .footer-links a {
             margin: 0 10px;
         }
+        .testimonials {
+    background-color: #f8f9fc;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.testimonials h2 {
+    font-size: 2rem;
+    color: #000000;
+    margin-bottom: 40px;
+}
+
+.testimonial-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.testimonial {
+    background-color: white;
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    transition: transform 0.3s ease;
+}
+
+.testimonial:hover {
+    transform: translateY(-10px);
+}
+
+.testimonial p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.testimonial h4 {
+    font-size: 1.1rem;
+    color: #0175ff;
+    margin: 0;
+}
+.profile-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    float: right;
+    padding: 10px;
+    background-color: white;
+    border-radius: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-section img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-section #user-name {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+}
+
+.profile-section button {
+    padding: 6px 12px;
+    border: none;
+    background-color: #0175ff;
+    color: white;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.profile-section button:hover {
+    background-color: #0056b3;
+}
+
+/* Optional: style login/signup buttons similarly */
+.login-signup-buttons a {
+    margin: 0 10px;
+    font-size: 1rem;
+    color: #0175ff;
+    text-decoration: none;
+    font-weight: 500;
+    border: 1px solid #0175ff;
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.login-signup-buttons a:hover {
+    background-color: #0175ff;
+    color: white;
+}
+
     </style>
 </head>
 <body>
@@ -312,8 +412,8 @@
                 <input type="text" id="Name" placeholder="Name" required>
                 <input type="text" id="location" placeholder="Location" required>
                 <input type="text" id="purpose" placeholder="Purpose" required>
-                <input type="text" id="budget" placeholder="Budget" required>
-                <input type="text" id="transport" placeholder="Transport" required>
+                <input type="text" id="budget" placeholder="Budget(High,Medium Or Low)" required>
+                <input type="text" id="transport" placeholder="Transport(Car,Bus,Train,Flight)" required>
                 <div>
                     <label for="photos">Upload Photos</label>
                     <input type="file" id="photos" name="photos[]" multiple required>
@@ -372,7 +472,24 @@
             </form>
         </div>
     </main>
-
+     <!-- Testimonials Section -->
+<section class="testimonials">
+    <h2>What Our Travelers Say about the website </h2>
+    <div class="testimonial-container">
+        <div class="testimonial">
+            <p>"Traveller's Verdict helped me find the perfect hidden getaway in Bengal! Loved the experience."</p>
+            <h4>- Priya S.</h4>
+        </div>
+        <div class="testimonial">
+            <p>"Thanks to this platform, my Switzerland trip was unforgettable. Great tips and easy to navigate!"</p>
+            <h4>- Alex M.</h4>
+        </div>
+        <div class="testimonial">
+            <p>"The Kyoto blog inspired me to explore Japan differently. Authentic and heartfelt reviews!"</p>
+            <h4>- Yuki T.</h4>
+        </div>
+    </div>
+</section>
     <!-- Footer -->
     <footer>
         <p>&copy; 2023 Travellers Verdict. All rights reserved.</p>
