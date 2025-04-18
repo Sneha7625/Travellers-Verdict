@@ -26,7 +26,7 @@
 
         header h1 {
             font-size: 1.8rem;
-            color: #0e0e0f;
+            color: #0175ff;
             margin: 0;
         }
 
@@ -229,7 +229,8 @@
         .footer-links a {
             margin: 0 10px;
         }
-        .testimonials {
+        /* Testimonials Section */
+.testimonials {
     background-color: #f8f9fc;
     padding: 60px 20px;
     text-align: center;
@@ -331,6 +332,7 @@
 
     </style>
 </head>
+
 <body>
     <!-- Header -->
     <header>
@@ -340,69 +342,78 @@
             <a href="about.html">About</a>
             <a href="Blog.html">Blog</a>
             <a href="contact.html">Contact</a>
-            <a href="itenary.html">Generate your itenary</a>
-            <a href="login.html">Login</a>
-            <a class="signup" href="signup.html">Sign Up</a>
+
+              <!-- Login and Signup buttons will be displayed only if not logged in -->
+              <div class="login-signup-buttons" id="login-signup-buttons">
+                <a href="login.html" id="login-btn">Login</a>
+                <a href="signup.html" id="signup-btn">Sign Up</a>
+            </div>
+
+            <!-- Profile section is shown after login -->
+            <div class="profile-section" id="profile-section">
+                <img id="profile-pic" src="" alt="Profile Picture" width="40" height="40" style="border-radius: 50%;">
+                <span id="user-name"></span> <button onclick="logout()">Logout</button>
+            </div>
+            
         </nav>
     </header>
 
     <!-- Main Content -->
     <main>
-        <h2>Discover Amazing Destinations</h2>
+        <h2>Discover Amazing Destinations </h2>
         <div class="card-container">
             <div class="card">
-                <img src="static\uploads\bengal.jpg" alt="Hidden Gems in Bengal">
+                <img src="https://www.treebo.com/blog/wp-content/uploads/2018/08/Rishyap.jpg" alt="Hidden Gems in Bengal">
                 <h3>Hidden Places in Bengal</h3>
-                <p>We had an amazing week exploring the hills of Darjeeling and the spiritual calm of Kalimpong. The toy train ride....</p>
+                <p>Discovered several hidden beauties and temples off the beaten path of Darjeeling with a serene path via the Toy Train...</p>
                 <a href="blog.html" class="read-more-btn">Read More</a>
             </div>
             <div class="card">
-                <img src="static\uploads\paris.jpg" alt="Paris on a Budget">
-                <h3>Paris,France</h3>
-                <p>The city of love didn’t disappoint! Eiffel Tower views at sunset, fresh croissants ...</p>
+                <img src="https://catmotors.net/wp-content/uploads/2022/05/Chiang-Mai-Travel-Guide.jpg" alt="Paris on a Budget">
+                <h3>Paris on a Budget</h3>
+                <p>We had an amazing family vacation in Paris! The Eiffel Tower at night was stunning, and Disneyland Paris was a big hit with the kids...</p>
                 <a href="blog.html" class="read-more-btn">Read More</a>
             </div>
             <div class="card">
-                <img src="static\uploads\kyoto.jpeg" alt="Tokyo Food Guide">
-                <h3>Kyoto,Japan</h3>
-                <p>Kyoto is a beautiful blend of tradition and calm. I visited dozens of ancient temples like Kinkaku-ji and Fushimi Inari Shrine — absolutely mesmerizing. ...</p>
+                <img src="https://th.bing.com/th/id/OIP.Zq4B4Jpos45pT76z8i3h4AHaE8?w=284&h=189&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="Tokyo Food Guide">
+                <h3>Kyoto and it's culture </h3>
+                <p>Kyoto is a dream for culture lovers! I spent five days exploring temples, shrines, and gardens. The Fushimi Inari Shrine was breathtaking, especially at sunrise. ...</p>
                 <a href="blog.html" class="read-more-btn">Read More</a>
             </div>
             <div class="card">
-                <img src="static\uploads\goa.png" alt="Goa">
-                <h3>Goa with homies</h3>
-                <p>Goa never disappoints! We stayed near Baga Beach and rented scooties to explore hidden spots like...</p>
+                <img src="https://pixelz.cc/wp-content/uploads/2018/05/pilatus-mountain-switzerland-uhd-4k-wallpaper.jpg" alt="Hidden Gems in Bengal">
+                <h3>Exploring the Beauty of the Swiss Alps</h3>
+                <p>Discover the breathtaking views and majestic landscapes of the Swiss Alps.....</p>
                 <a href="blog.html" class="read-more-btn">Read More</a>
             </div>
             <div class="card">
-                <img src="static\uploads\swiss_Alps.jpg" alt="Swiss alps ">
-                <h3>Swiss Alps,Switzerland</h3>
-                <p>Breathtaking views at every turn! I explored Zermatt and Jungfrau, and the scenery .....</p>
+                <img src="https://wallpapershome.com/images/pages/pic_h/5361.jpg" alt="Paris on a Budget">
+                <h3>Unveiling the Mysteries of Machu Pichu</h3>
+                <p>Machu Picchu is one of the most iconic ancient sites in the world....</p>
                 <a href="blog.html" class="read-more-btn">Read More</a>
             </div>
             <div class="card">
-                <img src="static\uploads\machu pichu.jpg" alt="machu pichu">
-                <h3>Mysteries of Machu Pichu</h3>
-                <p>A dream come true for any trekker! We did the Inca Trail hike — tough but worth every step....</p>
+                <img src="https://www.itchotels.com/content/dam/itchotels/in/umbrella/itc/hotels/itcgrandgoa-goa/images/overview/headmast-desktop/beach-experience.png" alt="Tokyo Food Guide">
+                <h3>Goa with my Homies</h3>
+                <p>Goa is the perfect getaway for a group trip! We rented scooters to explore different beaches, from the lively Baga Beach to the peaceful Palolem Beach...</p>
                 <a href="blog.html" class="read-more-btn">Read More</a>
             </div>
-           
             <div class="card">
-                <img src="static\uploads\ny.jpeg" alt="new york">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmWtF08CvcpsiaufpVqH_G923zMeXdyq3BEA&s" alt="Hidden Gems in Bengal">
                 <h3>Business in New York</h3>
-                <p>My business trip to NYC was a whirlwind — meetings in Midtown, quick lunches at food trucks, and evenings catching skyline...</p>
+                <p>I visited NYC for a conference and extended my trip to explore. The subway was efficient but confusing at times. Times Square was overwhelming but worth seeing once. The best part was the food...</p>
                 <a href="blog.html" class="read-more-btn">Read More</a>
             </div>
             <div class="card">
-                <img src="static\uploads\nomad.webp" alt="nomadic life">
-                <h3>Multiple (Vietnam, Georgia, Turkey)</h3>
-                <p>Living as a digital nomad has been liberating. I worked remotely from Hanoi, explored Batumi’s beaches, and hiked the hills...</p>
+                <img src="https://cdn.prod.website-files.com/63a9ec00d827c54b871ce72f/6514ee7e7292ae4c087fb662_Colombia-Digital-Nomads.webp" alt="Paris on a Budget">
+                <h3>The Nomadic Life</h3>
+                <p>Medellín is an underrated gem for digital nomads. The city is super affordable, and the WiFi in cafes and co-working spaces like Selina is fast. The metro system is clean and efficient, making it easy to explore. The weather is perfect...</p>
                 <a href="blog.html" class="read-more-btn">Read More</a>
             </div>
             <div class="card">
-                <img src="static\uploads\thailand.jpg" alt="chang mai">
-                <h3>Chiang Mai, Thailand</h3>
-                <p>Chiang Mai is a top destination for digital nomads. The cost of living is incredibly low—great apartments for under $500/month. Co-working spaces like Punspace and ...</p>
+                <img src="https://catmotors.net/wp-content/uploads/2022/05/Chiang-Mai-Travel-Guide.jpg" alt="Tokyo Food Guide">
+                <h3>The Thailand Business Tour</h3>
+                <p>Chiang Mai is a top destination for digital nomads. The cost of living is incredibly low—great apartments for under $500/month. Co-working spaces like Punspace and CAMP provide fast WiFi...</p>
                 <a href="blog.html" class="read-more-btn">Read More</a>
             </div>
         </div>
@@ -414,8 +425,8 @@
                 <input type="text" id="Name" placeholder="Name" required>
                 <input type="text" id="location" placeholder="Location" required>
                 <input type="text" id="purpose" placeholder="Purpose" required>
-                <input type="text" id="budget" placeholder="Budget(High,Medium Or Low)" required>
-                <input type="text" id="transport" placeholder="Transport(Car,Bus,Train,Flight)" required>
+                <input type="text" id="budget" placeholder="Budget" required>
+                <input type="text" id="transport" placeholder="Transport" required>
                 <div>
                     <label for="photos">Upload Photos</label>
                     <input type="file" id="photos" name="photos[]" multiple required>
@@ -425,45 +436,111 @@
             </form>
         </div>
         <script>
-           function submitReview() {
-    const formData = new FormData();
-    const files = document.getElementById("photos").files;
+            // Check if the user is logged in by checking localStorage
+            document.addEventListener('DOMContentLoaded', function() {
+                const user = localStorage.getItem("email");
+    
+                if (user) {
+                    // If user is logged in, show profile icon and hide login/signup
+                    showProfile();
+                } else {
+                    // If user is not logged in, show login/signup
+                    showLoginSignup();
+                }
+            });
+    
+            function showProfile() {
+                const profileSection = document.getElementById("profile-section");
+                const loginSignupButtons = document.getElementById("login-signup-buttons");
+                
+                // Hide login/signup buttons and show profile section
+                loginSignupButtons.style.display = "none";
+                profileSection.style.display = "inline-block";
+    
+                // Set profile image and username (optional, you can retrieve this info from localStorage or backend)
+                document.getElementById("profile-pic").src = "https://i.pravatar.cc/150?img=1";  // Example profile pic
+                document.getElementById("user-name").innerText = localStorage.getItem("name");
+            }
+    
+            function showLoginSignup() {
+                const profileSection = document.getElementById("profile-section");
+                const loginSignupButtons = document.getElementById("login-signup-buttons");
+    
+                // Show login/signup buttons and hide profile section
+                loginSignupButtons.style.display = "inline-block";
+                profileSection.style.display = "none";
+            }
+    
+            // Logout function
+            function logout() {
+                localStorage.removeItem("token");
+                localStorage.removeItem("email");
+                window.location.reload(); // Reload the page to update the display
+            }
+        
+            function submitReview() {
+    const reviewData = {
+        Name: document.getElementById("Name").value,
+        location: document.getElementById("location").value,
+        purpose: document.getElementById("purpose").value,
+        budget: document.getElementById("budget").value,
+        transport: document.getElementById("transport").value,
+        review: document.getElementById("review").value
+    };
 
+    // Create FormData object
+    const formData = new FormData();
+    formData.append('Name', reviewData.Name);
+    formData.append('location', reviewData.location);
+    formData.append('purpose', reviewData.purpose);
+    formData.append('budget', reviewData.budget);
+    formData.append('transport', reviewData.transport);
+    formData.append('review', reviewData.review);
+
+    // Add files (images)
+    const files = document.getElementById('photos').files;
     for (let i = 0; i < files.length; i++) {
-        formData.append("photos", files[i]);
+        formData.append('photos[]', files[i]);
     }
 
-    fetch("http://127.0.0.1:5000/upload_photos", {
+    fetch("http://127.0.0.1:5000/add_review", {
         method: "POST",
-        body: formData
-    })
-    .then(response => response.json())
-    .then(photoData => {
-        const reviewData = {
-            Name: document.getElementById("Name").value,
-            location: document.getElementById("location").value,
-            purpose: document.getElementById("purpose").value,
-            budget: document.getElementById("budget").value,
-            transport: document.getElementById("transport").value,
-            review: document.getElementById("review").value,
-            photo_urls: photoData.urls
-        };
-
-        return fetch("http://127.0.0.1:5000/add_review", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(reviewData)
-        });
+        body: formData  // Sending FormData, which includes both text and files
     })
     .then(response => response.json())
     .then(data => {
-        alert(data.message);
-        document.getElementById("reviewForm").reset();
+        alert(data.message); // Show success message
+        document.getElementById("reviewForm").reset(); // Clear form
     })
     .catch(error => console.error("Error:", error));
 }
 
+            
             </script>
+            
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    const token = localStorage.getItem("token");
+                    const userEmail = localStorage.getItem("userEmail");
+                
+                    const nav = document.querySelector(".nav-buttons");
+                    if (token && userEmail) {
+                        // Remove login/signup buttons
+                        nav.innerHTML = `
+                            <span class="user-info">👤 ${userEmail}</span>
+                            <button id="logoutBtn">Logout</button>
+                        `;
+                
+                        document.getElementById("logoutBtn").addEventListener("click", () => {
+                            localStorage.removeItem("token");
+                            localStorage.removeItem("userEmail");
+                            window.location.href = "login.html";
+                        });
+                    }
+                });
+                </script>
+                
+              
         <!-- Newsletter Section -->
         <div class="newsletter">
             <h2>Stay Updated with the Latest Travel News</h2>
@@ -474,7 +551,7 @@
             </form>
         </div>
     </main>
-     <!-- Testimonials Section -->
+    <!-- Testimonials Section -->
 <section class="testimonials">
     <h2>What Our Travelers Say about the website </h2>
     <div class="testimonial-container">
@@ -492,6 +569,7 @@
         </div>
     </div>
 </section>
+
     <!-- Footer -->
     <footer>
         <p>&copy; 2023 Travellers Verdict. All rights reserved.</p>

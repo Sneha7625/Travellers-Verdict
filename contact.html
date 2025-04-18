@@ -235,12 +235,38 @@
         <div class="right-section">
             <div class="contact-form">
                 <h3>Contact Us</h3>
-                <form action="#" method="post">
+                <form id="contactForm" method="POST" >
                     <input type="text" name="name" placeholder="Your Name" required>
                     <input type="email" name="email" placeholder="Your Email" required>
                     <textarea name="message" placeholder="Your Message" rows="6" required></textarea>
                     <div  class="button"><input type="submit" value="Send Message"></div>
                 </form>
+                <script>
+const form = document.querySelector("form");
+form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const formData = new FormData(form);
+
+    fetch("http://localhost:5000/send-message", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) throw new Error("Network response was not ok");
+        return response.text();
+    })
+    .then(data => {
+        alert("Message sent successfully!");
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        alert("Failed to send message. Server may be down.");
+    });
+});
+
+                  </script>
+                  
             </div>
         </div>
     </div>
@@ -249,7 +275,7 @@
     <footer>
         <p>&copy; 2025 Techie Panda. All rights reserved.</p>
         <p>Contact us at :+91 7318788962 or +91 9065755808</p>
-        <p>For further queries:sneha.agarwal.cse27@heritageit.edu.in <br>        piyush.singh.cse27@heritageit.edu.in</br> </p>
+        <p>For further queries: Mail us at travellers.verdict@gmail.com</p>
     </footer>
 
 </body>

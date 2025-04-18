@@ -7,6 +7,8 @@ from bson import ObjectId
 import os
 import uuid
 import google.generativeai as genai
+import smtplib
+from email.mime.text import MIMEText
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -244,6 +246,53 @@ def generate_itinerary():
     except Exception as e:
         # Return any exception that occurs
         return jsonify({"error": str(e)}), 500
+    
+
+@app.route("/send-message", methods=["POST"])
+def send_message():
+    try:
+        name = request.form.get("name")
+        email = request.form.get("email")
+        message = request.form.get("message")
+
+        # Log the received data for debugging
+        app.logger.info(f"Received message from {name} ({email}): {message}")
+
+        if not name or not email or not message:
+            raise ValueError("Name, email, and message are required.")
+
+        msg_body = f"""
+        📬 New message from Traveller's Verdict:
+
+        👤 Name: {name}
+        📧 Email: {email}
+        📝 Message:
+        {message}
+        """
+
+        # 🔁 CHANGE THIS TO YOUR EMAIL
+        sender_email = "travellers.verdict@gmail.com"   # <-- your Gmail (same one used for login)
+        receiver_email = "travellers.verdict@gmail.com"  # <-- where you want to receive the messages
+        app_password = "tbcs wayi ybok wtxi"  # <-- your Gmail app password
+
+        msg = MIMEText(msg_body)
+        msg["Subject"] = "New Contact Message"
+        msg["From"] = sender_email
+        msg["To"] = receiver_email
+
+        # Attempt to send the email
+        with smtplib.SMTP("smtp.gmail.com", 587) as server:
+            server.starttls()
+            server.login(sender_email, app_password)  # 🔒 login securely
+            server.send_message(msg)
+
+        app.logger.info("Message sent successfully")
+        return jsonify({"message": "Message sent successfully!"}), 200
+    
+    except Exception as e:
+        app.logger.error(f"Error sending message: {e}")
+        return jsonify({"error": f"Internal server error: {str(e)}"}), 500
+
 
 if __name__ == "__main__":
     app.run(debug=True)
