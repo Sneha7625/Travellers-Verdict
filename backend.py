@@ -41,15 +41,32 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 # USER AUTHENTICATION
 @app.route('/signup', methods=['POST'])
 def signup():
-    data = request.json
+    data = request.get_json()
     name, email, password = data.get("name"), data.get("email"), data.get("password")
+    address = data.get("address")
+    phone = data.get("phone")
     if not name or not email or not password:
         return jsonify({"error": "Missing required fields"}), 400
+
     if users_collection.find_one({"email": email}):
         return jsonify({"error": "Email already registered"}), 409
+
     hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
-    users_collection.insert_one({"name": name, "email": email, "password": hashed_password})
-    return jsonify({"message": "Signup successful!"}), 201
+    users_collection.insert_one ({
+        "name": name,
+        "email": email,
+        "password": hashed_password,
+        "address": address,
+        "phone": phone
+    })
+
+    access_token = create_access_token(identity=email)
+
+    return jsonify({
+        "message": "Signup successful!",
+        "token": access_token,
+        "name": name
+    }), 201
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -152,6 +169,24 @@ def add_comment():
     user_email = get_jwt_identity()
     reviews_collection.update_one({"_id": ObjectId(review_id)}, {"$push": {"comments": {"user_email": user_email, "comment": comment}}})
     return jsonify({"message": "Comment added successfully!"}), 200
+
+
+@app.route('/profile', methods=['GET'])
+@jwt_required()
+def profile():
+    current_user = get_jwt_identity()  # Get the email of the currently authenticated user
+    user = users_collection.find_one({"email": current_user})
+    
+    if user:
+        response_data = {
+            "name": user["name"],
+            "email": user["email"],
+            "address": user["address"],
+            "phone": user["phone"]
+        }
+        return jsonify(response_data)
+    else:
+        return jsonify({"error": "User not found"}), 404
 
 # UPDATE RATING
 @app.route("/update_rating", methods=["POST"])

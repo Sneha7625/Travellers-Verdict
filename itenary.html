@@ -106,8 +106,10 @@
             <a href="about.html">About</a>
             <a href="Blog.html">Blog</a>
             <a href="contact.html">Contact</a>
-            <a href="login.html">Login</a>
-            <a class="signup" href="signup.html">Sign Up</a>
+            <a id="profile-link" href="profile.html" style="display: none;">Profile</a>
+            <a id="logout-link" href="#" style="display: none;" onclick="logout()">Logout</a>
+            <a id="login-link" href="login.html">Login</a>
+            <a id="signup-link" class="signup" href="signup.html">Sign Up</a>
         </nav>
       </header>
   <div class="container">
@@ -145,6 +147,30 @@
   </div>
 
   <script>
+     // Check if user is logged in by checking for the token in localStorage
+     document.addEventListener("DOMContentLoaded", () => {
+            const token = localStorage.getItem("token");
+
+            if (token) {
+                // If user is logged in, hide login/signup and show profile/logout buttons
+                document.getElementById("profile-link").style.display = "inline-block";
+                document.getElementById("logout-link").style.display = "inline-block";
+                document.getElementById("login-link").style.display = "none";
+                document.getElementById("signup-link").style.display = "none";
+            } else {
+                // If not logged in, show login/signup
+                document.getElementById("login-link").style.display = "inline-block";
+                document.getElementById("signup-link").style.display = "inline-block";
+                document.getElementById("profile-link").style.display = "none";
+                document.getElementById("logout-link").style.display = "none";
+            }
+        });
+
+        // Logout function to clear localStorage and redirect to login page
+        function logout() {
+            localStorage.clear();
+            window.location.href = "login.html";  // Redirect to login page after logout
+        }
     const form = document.getElementById('itinerary-form');
     const output = document.getElementById('itinerary-output');
 

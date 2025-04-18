@@ -15,7 +15,7 @@
         }
 
         /* Header Styling */
-   header {
+        header {
             background-color: #f8f9fc;
             display: flex;
             justify-content: space-between;
@@ -37,12 +37,12 @@
             text-decoration: none;
             font-weight: 500;
         }
+
         nav a:hover {
             color: #a6ceff;
             box-shadow: #0073ff;
         }
 
-        
         /* Main Section Styling */
         main {
             padding: 100px 0;
@@ -75,7 +75,7 @@
                 background-position: 0 0;
             }
             100% {
-                background-position: -2000px 0; /* Adjust this value to control the sliding distance */
+                background-position: -2000px 0;
             }
         }
 
@@ -184,8 +184,11 @@
             <a href="Blog.html">Blog</a>
             <a href="contact.html">Contact</a>
             <a href="itenary.html">Generate your itenary</a>
-            <a href="login.html">Login</a>
-            <a class="signup" href="signup.html">Sign Up</a>
+            <!-- The following links will be conditionally shown based on login status -->
+            <a id="profile-link" href="profile.html" style="display: none;">Profile</a>
+            <a id="logout-link" href="#" style="display: none;" onclick="logout()">Logout</a>
+            <a id="login-link" href="login.html">Login</a>
+            <a id="signup-link" class="signup" href="signup.html">Sign Up</a>
         </nav>
     </header>
 
@@ -193,7 +196,7 @@
     <main>
         <h2>About Us</h2>
         <p class="about">
-            Welcome to Traveller's Verdict! We are a passionate team of explorers, storytellers, and travel enthusiasts dedicated to bringing you authentic and inspiring travel content. Our mission is to help travelers of all kinds discover hidden gems, plan the perfect vacation, and find honest, first-hand reviews from seasoned explorers like ourselves. Whether you're searching for the next adventure or want to share your travel experiences, we’ve got you covered. 
+            Welcome to Traveller's Verdict! We are a passionate team of explorers, storytellers, and travel enthusiasts dedicated to bringing you authentic and inspiring travel content. Our mission is to help travelers of all kinds discover hidden gems, plan the perfect vacation, and find honest, first-hand reviews from seasoned explorers like ourselves. Whether you're searching for the next adventure or want to share your travel experiences, we’ve got you covered.
         </p>
         <p class="about">
             At Travellers Verdict, we believe that travel is about more than just the destination; it's about the journey, the people you meet, and the memories you create along the way. Our team is committed to providing you with reliable advice, recommendations, and tips to make your travels unforgettable.
@@ -226,7 +229,7 @@
             <div class="profile-card">
                 <img src="piyush.jpg" alt="Piyush Singh">
                 <h3>Piyush Singh</h3>
-                <p>Content writter</p>
+                <p>Content Writer</p>
             </div>
         </div>
     </main>
@@ -236,5 +239,32 @@
         <p>&copy; 2025 Travellers Verdict. All rights reserved.</p>
         <a href="#">Back to top</a>
     </footer>
+
+    <script>
+        // Check if user is logged in by checking for the token in localStorage
+        document.addEventListener("DOMContentLoaded", () => {
+            const token = localStorage.getItem("token");
+
+            if (token) {
+                // If user is logged in, hide login/signup and show profile/logout buttons
+                document.getElementById("profile-link").style.display = "inline-block";
+                document.getElementById("logout-link").style.display = "inline-block";
+                document.getElementById("login-link").style.display = "none";
+                document.getElementById("signup-link").style.display = "none";
+            } else {
+                // If not logged in, show login/signup
+                document.getElementById("login-link").style.display = "inline-block";
+                document.getElementById("signup-link").style.display = "inline-block";
+                document.getElementById("profile-link").style.display = "none";
+                document.getElementById("logout-link").style.display = "none";
+            }
+        });
+
+        // Logout function to clear localStorage and redirect to login page
+        function logout() {
+            localStorage.clear();
+            window.location.href = "login.html";  // Redirect to login page after logout
+        }
+    </script>
 </body>
 </html>
