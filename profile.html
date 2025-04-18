@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #74ebd5, #acb6e5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .profile-container {
+            background-color: white;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="profile-container">
+        <h1 id="welcome-message">Loading...</h1>
+        <p id="email-display"></p>
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <script>
+       document.addEventListener("DOMContentLoaded", async () => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+        window.location.href = "login.html";
+        return;
+    }
+
+    try {
+        const response = await fetch("http://127.0.0.1:5000/profile", {
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer " + token
+            }
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            // Update profile info
+            document.getElementById("welcome-message").textContent = `Welcome, ${data.name}!`;
+            document.getElementById("email-display").textContent = `Email: ${data.email}`;
+
+            // Redirect to homepage (or desired location)
+            window.location.href = "index.html"; // Change to your homepage URL
+        } else {
+            console.error(data.error);
+            window.location.href = "login.html";
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        window.location.href = "login.html";
+    }
+});
+
+
+        function logout() {
+            localStorage.clear();
+            window.location.href = "login.html";
+        }
+    </script>
+
+</body>
+</html>

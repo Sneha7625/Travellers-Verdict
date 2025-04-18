@@ -13,25 +13,33 @@
       background-color: #f7faff;
       color: #333;
     }
-    header {
-      background-color: #f8f9fc;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 50px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    header h1 {
-      font-size: 1.8rem;
-      color: #0175ff;
-      margin: 0;
-    }
-    nav a {
-      margin: 0 10px;
-      text-decoration: none;
-      color: #0175ff;
-      font-weight: bold;
-    }
+    /* Header Styling */
+   header {
+            background-color: #f8f9fc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 50px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            color: #060606;
+            margin: 0;
+        }
+
+        nav a {
+            margin: 0 15px;
+            font-size: 1rem;
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        nav a:hover {
+            color: #a6ceff;
+            box-shadow: #0073ff;
+        }
     .search-bar, .filters {
       text-align: center;
       margin: 20px 0;
@@ -121,10 +129,12 @@
   <header>
     <h1>Traveller's Verdict</h1>
     <nav>
-      <a href="index.html">Home</a>
-      <a href="blog.html">Blog</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="itenary.html">Generate your itenary</a>
+        <a href="login.html">Login</a>
+        <a class="signup" href="signup.html">Sign Up</a>
     </nav>
   </header>
 

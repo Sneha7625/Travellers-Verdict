@@ -4,9 +4,17 @@ from flask_jwt_extended import JWTManager, create_access_token, jwt_required, ge
 from flask_cors import CORS
 from pymongo import MongoClient
 from bson import ObjectId
-
 import os
 import uuid
+import google.generativeai as genai
+from dotenv import load_dotenv
+load_dotenv()
+
+# Gemini API Configuration
+# Gemini API Configuration
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+gemini_model = genai.GenerativeModel('models/gemini-1.5-flash-002')
+
 
 app = Flask(__name__)
 CORS(app)
@@ -182,6 +190,60 @@ def update_rating():
     )
 
     return jsonify({"message": "Rating updated successfully!"}), 200
+@app.route("/list_models", methods=["GET"])
+def list_models():
+    try:
+        # List available models and convert the generator into a list
+        models = list(genai.list_models())  # Convert the generator to a list
+        print(models)  # Prints the list of available models to the console for debugging
+        return jsonify(models)  # Returns the models as a JSON response to the client
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@app.route("/generate_itinerary", methods=["POST"])
+def generate_itinerary():
+    data = request.json
+
+    # Getting inputs from the user
+    destination = data.get("destination")
+    budget = data.get("budget")
+    transport = data.get("transport")
+    dates = data.get("dates", "not specified")
+    purpose = data.get("purpose", "general travel")
+
+    # Ensure all necessary data is provided
+    if not all([destination, budget, transport]):
+        return jsonify({"error": "Destination, budget, and transport are required."}), 400
+
+    # Create a prompt based on the user inputs
+    prompt = f"""
+    Generate a personalized travel itinerary based on the following:
+    - Destination: {destination}
+    - Budget: ${budget}
+    - Transport Preference: {transport}
+    - Travel Dates: {dates}
+    - Purpose: {purpose}
+
+    The itinerary should include:
+    - Suggested activities per day
+    - Places to eat
+    - Local transport advice
+    - Accommodation options within budget
+    - Estimated cost breakdown
+    """
+
+    try:
+        # Call Gemini API to generate the itinerary
+        response = gemini_model.generate_content(prompt)
+        
+        # Check if the response is valid
+        if response.text:
+            return jsonify({"itinerary": response.text})
+        else:
+            return jsonify({"error": "Failed to generate itinerary, no content returned."}), 500
+    except Exception as e:
+        # Return any exception that occurs
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
     app.run(debug=True)
