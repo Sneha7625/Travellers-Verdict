@@ -503,7 +503,7 @@
         formData.append('photos[]', files[i]);
     }
 
-    fetch("http://127.0.0.1:5000/add_review", {
+    fetch("https://back-5-bolj.onrender.com/add_review", {
         method: "POST",
         body: formData  // Sending FormData, which includes both text and files
     })
