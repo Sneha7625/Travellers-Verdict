@@ -86,7 +86,7 @@
   button.disabled = true;
   button.textContent = "Logging in...";
 
-  fetch("http://localhost:5000/login", {
+  fetch("https://back-5-bolj.onrender.com/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password })
