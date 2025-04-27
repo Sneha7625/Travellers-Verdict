@@ -461,7 +461,7 @@
         formData.append("photos", files[i]);
     }
 
-    fetch("http://127.0.0.1:5000/upload_photos", {
+    fetch("https://back-5-bolj.onrender.com/upload_photos", {
         method: "POST",
         body: formData
     })
@@ -477,7 +477,7 @@
             photo_urls: photoData.urls
         };
 
-        return fetch("http://127.0.0.1:5000/add_review", {
+        return fetch("https://back-5-bolj.onrender.com/add_review", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(reviewData)
