@@ -211,7 +211,7 @@
     let allReviews = [];
 
     document.addEventListener("DOMContentLoaded", function () {
-      fetch("http://127.0.0.1:5000/get_reviews")
+      fetch("https://back-5-bolj.onrender.com/get_reviews")
         .then(response => response.json())
         .then(reviews => {
           allReviews = reviews;
